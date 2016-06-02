@@ -8,5 +8,12 @@ Lendo valores em arquivos dat(ASCII) ou txt, e enviando para Basic Variables do 
   - Pandas
   - EPM SDK para linguagem Python
 
+###epmhighcharts
+Lendo valores do EPM e criando gráficos com a biblioteca HighCharts. 
+  Requisitos:
+  - Numpy
+  - EPM SDK para linguagem Python
+  - Highcharts
+
 
 
