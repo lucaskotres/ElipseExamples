@@ -8,6 +8,9 @@ Lendo valores em arquivos dat(ASCII) ou txt, e enviando para Basic Variables do 
 ###epmhighcharts
 Lendo valores do EPM e criando gráficos com a biblioteca HighCharts. Para preencher alguns gráficos foram gerados valores randomicos.
 
+###WebinarBMS
+Exemplos utilizados na apresentação do webinar sobre análises em sistemas BMS. https://youtu.be/tE2QdUm4Ix4
+
 
 
 
