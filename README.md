@@ -1,2 +1,2 @@
 # ElipseExamples
-Exemplos de códigos utilizando os produtos da Elipse Software
+Exemplos utilizando os produtos da Elipse Software
