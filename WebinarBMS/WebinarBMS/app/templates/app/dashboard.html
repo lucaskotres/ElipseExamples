@@ -1,0 +1,172 @@
+﻿{% extends "app/layout.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+
+<div id="container" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+{% endblock %}
+
+
+
+{% block extraJS%}
+
+ <link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
+ <script src="{% static "app/scripts/HighCharts/jquery.min.js" %}"></script>
+<script src="{% static "app/scripts/HighCharts/highstock.js" %}"></script>
+<script>
+
+
+
+    $(function () {
+
+        var annotations_dates = {{annotations_dates|safe}};
+        var annotations_comfort = {{annotations_comfort|safe}};
+        var annotations_setpoint = {{annotations_setpoint|safe}};
+        var annotations_StatusAir ={{annotations_StatusAir|safe}}
+        var annotations_T_OUT = {{annotations_T_OUT|safe}}
+        var annotations_WortTime = {{annotations_WortTime|safe}}
+        var annotations_NUser = {{annotations_NUser|safe}}
+
+
+
+
+        var dates_Tin = {{tag_dates|safe}};
+        var datas_Tin = {{tag_datas|safe}};
+       var ListaDados1 = [];
+
+        for (var i =0; i<dates_Tin.length; i++) {
+            var data = dates_Tin[i].split(",");
+            ListaDados1[i] = [Date.UTC(data[0],data[1]-1,data[2],data[3],data[4],data[5],data[6]),datas_Tin[i]];
+        }
+
+        var options = {
+
+            xAxis: {
+                type: 'datetime',
+                enable:true,
+                labels: {
+                    align: 'left'
+                },
+            },
+
+            title: {
+                text: 'Temperatura'
+            },
+            subtitle: {
+                text: 'Anotações Março',
+                
+            },
+            tooltip: {
+                style: {
+                    width: '250px'
+                }
+            },
+
+            yAxis: [{
+                max: 40,
+                labels: {
+                    enable: true
+                },
+                title: {
+                    text: 'Temperatura (°C)',
+                   
+        
+                },
+                gridLineWidth: 1,
+                plotLines:[{
+                    value:24.5,
+                    color: 'green',    
+                    dashStyle: 'shortdash',
+                    width: 2,
+                    label: {
+                        text: 'Conforto Térmico'
+                    }
+                }]
+              
+            }, {
+                allowDecimals: false,
+                max: 15,
+                labels: {
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
+                    }
+                },
+                title: {
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                opposite: true,
+                gridLineWidth: 0
+            }],
+
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2
+                    },
+                    fillOpacity: 0.5
+                },
+                flags: {
+                    tooltip: {
+                        xDateFormat: '%B %e, %Y'
+                    }
+                }
+            },
+            scrollbar: {
+                barBackgroundColor: 'gray',
+                barBorderRadius: 7,
+                barBorderWidth: 0,
+                buttonBackgroundColor: 'gray',
+                buttonBorderWidth: 0,
+                buttonBorderRadius: 7,
+                trackBackgroundColor: 'none',
+                trackBorderWidth: 1,
+                trackBorderRadius: 8,
+                trackBorderColor: '#CCC'
+            },
+
+            series: [{
+                name: 'Temperatura Interna',
+                id: 'revenue',
+                //type: 'area',
+                data: ListaDados1,
+                tooltip: {
+                    xDateFormat: '%B %e, %Y',
+                    valueSuffix: '°C',
+                    valueDecimals: 2
+                }
+
+            }]
+        };
+   
+        var annotations = [];
+        for (var i =0; i<annotations_dates.length; i++) {
+             var data = annotations_dates[i].split(",");
+             annotations[i]={ x: Date.UTC(data[0],data[1]-1,data[2],data[3],data[4],data[5],data[6]), text: 'SetPoint: '+annotations_setpoint[i] 
+                +'<br>Status Ar: '+annotations_StatusAir[i]+'<br>T Externa: '+annotations_T_OUT[i]+'°C<br>Expediente: '+ annotations_WortTime[i]
+                +'<br>N Usuários: '+ annotations_NUser[i]
+            , title: annotations_comfort[i] }
+       }
+
+
+        // Add flags for important milestones. This requires Highstock.
+        if (Highcharts.seriesTypes.flags) {
+            options.series.push({
+                type: 'flags',
+                name: 'Events',
+                color: '#333333',
+                fillColor: 'rgba(255,255,255,0.8)',
+                data: annotations,
+                onSeries: 'revenue',
+                showInLegend: false,
+            });
+        }
+
+        $('#container').highcharts('StockChart',options);
+    });
+</script>
+{%endblock%}

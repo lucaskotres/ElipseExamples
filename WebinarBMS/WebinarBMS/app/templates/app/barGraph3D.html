@@ -1,0 +1,82 @@
+﻿{% extends "app/layout.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+
+<div id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+{% endblock %}
+
+
+
+{% block extraJS%}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script>
+
+
+
+    $(function () {
+
+
+
+    comfortDatas = [{
+                    name: 'UP',
+                    data: {{up|safe}}
+                }, {
+                    name: 'OK',
+                    data: {{ok}}
+                }, {
+                    name: 'DOWN',
+                    data: {{down}}
+                }];
+
+    days= {{days}};
+    
+
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 0,
+                viewDistance: 25,
+                depth:50
+            }
+        },
+
+        title: {
+            text: '% Faixas de Temperatura'
+        },
+        subtitle: {
+            text: '{{titleGraph|safe}}'
+        },
+        xAxis: {
+            categories: days,
+            title: {text: 'Dias'}
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total em cada Faixa'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: comfortDatas
+    });
+});
+
+       
+</script>
+{%endblock%}

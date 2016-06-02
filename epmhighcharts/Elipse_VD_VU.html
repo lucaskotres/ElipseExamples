@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+    <body style="margin:0;padding:0">
+                <div id="container" style="width:1700px;height:830px;">Loading....</div>
+
+
+    <script>
+        $(function(){
+
+
+ 
+
+
+
+
+            Highcharts.setOptions({"lang": {}, "global": {}});
+            var option = {"loading": {}, "subtitle": {"text": "Volume disponibilizado e Volume utilizado"}, "xAxis": [{"crosshair": true, "categories": ["Jul12", "Ago12", "Set12", "Out12", "Nov12", "Dez12", "Jan13", "Fev13", "Mar13", "Abr13", "Mai13", "Jun13", "Jul13", "Ago13", "Set13", "Out13", "Nov13", "Dez13", "Jan14", "Fev14", "Mar14", "Abr14", "Mai14", "Jun14", "Jul14", "Ago14", "Set14", "Out14", "Nov14", "Dez14", "Jan15", "Fev15", "Mar15", "Abr15", "Mai15", "Jun15", "Jul15"]}], "title": {"text": "VD e VU (m3)"}, "series": {}, "labels": {}, "chart": {"width": 1700, "zoomType": "xy", "renderTo": "container", "height": 830}, "tooltip": {"shared": true}, "plotOptions": {}, "yAxis": [{"labels": {"style": {"color": Highcharts.getOptions().colors[3]}, "format": "R$ {value}"}, "opposite": true, "title": {"text": "Valor Faturado", "style": {"color": Highcharts.getOptions().colors[3]}}}, {"title": {"text": "Volume", "style": {"color": Highcharts.getOptions().colors[1]}}, "labels": {"style": {"color": Highcharts.getOptions().colors[1]}, "format": "{value} m3"}, "gridLineWidth": 0}], "credits": {"enabled": false}, "colors": {}, "pane": {}, "exporting": {}, "drilldown": {}, "navigation": {}, "legend": {"enabled": true}};
+
+
+            var data = [{"name": "Volume Distribuido", "yAxis": 1, "type": "area", "data": [10703, 13219, 12295, 10577, 11234, 10763, 10312, 13165, 12295, 10878, 11400, 11326, 13795, 13420, 11444, 12549, 12058, 11849, 10943, 10478, 12931, 11157, 12204, 10321, 12108, 13279, 11291, 13644, 12249, 12461, 12586, 13152, 13247, 13188], "tooltip": {"valueSuffix": " m3"}}, {"name": "Volume Utilizado", "yAxis": 1, "type": "area", "tooltip": {"valueSuffix": " m3"}, "marker": {"enabled": false}, "data": [7572, 6003, 7135, 6004, 8224, 7043, 6051, 8022, 6096, 6254, 7756, 6584, 7239, 7826, 6189, 6308, 8632, 6768, 8858, 6210, 6578, 8738, 8959, 8638, 6228, 8376, 6248, 8193, 6469, 7291, 6935, 7621, 7406, 7387]}, {"name": "Volume Social", "yAxis": 1, "type": "area", "data": [665, 1028, 687, 1359, 1131, 637, 830, 1230, 1003, 1114, 1303, 1368, 1418, 1211, 908, 543, 1347, 1143, 1465, 773, 1083, 713, 823, 979, 580, 509, 1322, 708, 1244, 1353, 518, 1176, 1058, 944], "tooltip": {"valueSuffix": " m3"}}, {"data": [414.41999999999996, 298.5, 386.88, 278.7, 425.58, 384.36, 313.26, 407.52, 305.58, 308.4, 387.18, 312.96, 349.26, 396.9, 316.86, 345.9, 437.09999999999997, 337.5, 443.58, 326.21999999999997, 329.7, 481.5, 488.15999999999997, 459.53999999999996, 338.88, 472.02, 295.56, 449.09999999999997, 313.5, 356.28, 385.02, 386.7, 380.88, 386.58], "type": "spline", "name": "Total Faturado", "tooltip": {"valueSuffix": " $"}}];
+            option.series = data;
+
+ 
+
+            var chart = new Highcharts.Chart(option);
+
+
+
+
+
+ 
+
+
+        
+    });
+        </script>
+
+    </body>
+</html>
