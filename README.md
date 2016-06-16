@@ -1,5 +1,6 @@
 # ElipseExamples
 ##Exemplos utilizando os produtos da Elipse Software
+[![Code Health](https://landscape.io/github/lucaskotres/ElipseExamples/master/landscape.svg?style=flat-square)](https://landscape.io/github/lucaskotres/ElipseExamples/master)
 
 ###Tools
 Funções úteis!
