@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''Elipse Plant Manager - Conecta em servidores EPM e busca DataObjects
 Copyright (C) 2015 Elipse Software.
