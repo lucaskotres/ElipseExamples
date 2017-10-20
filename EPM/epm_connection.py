@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-'''Elipse Plant Manager - Conecta em servidores EPM e busca DataObjects
-Copyright (C) 2015 Elipse Software.
-'''
+'''Elipse Plant Manager - Conecta em servidores EPM e busca DataObjects'''
+
 __author__ = 'Kotres'
 
 import epmsdk
