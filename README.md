@@ -1,21 +1,42 @@
-# ElipseExamples
-##Exemplos utilizando os produtos da Elipse Software
-[![Code Health](https://landscape.io/github/lucaskotres/ElipseExamples/master/landscape.svg?style=flat-square)](https://landscape.io/github/lucaskotres/ElipseExamples/master)
+# Elipse Software tools and examples
 
-###Tools
-Funções úteis!
+Elipse EPM and Elipse E3 - Python and VBScript 
 
-###dat2epm
-Lendo valores em arquivos dat(ASCII) ou txt, e enviando para Basic Variables do EPM, inserindo timestamp e qualidade. 
+## How to use
 
+Get a copy of the source code and running on your local machine for development and testing purposes. Don't use in live systems. 
 
-###epmhighcharts
-Lendo valores do EPM e criando gráficos com a biblioteca HighCharts. Para preencher alguns gráficos foram gerados valores randomicos.
+### Prerequisites
 
-###WebinarBMS
-Exemplos utilizados na apresentação do webinar sobre análises em sistemas BMS. https://youtu.be/tE2QdUm4Ix4
+You need to have any of the Elipse Software's platform. See below.
 
 
-###google_heatmap
-Utilizando a API de mapas do google com dados do EPM.
+## Built With
+
+* [Elipse E3](https://www.elipse.com.br/produto/elipse-e3/) - The Elipse SCADA platform
+* [Elipse EPM](https://www.elipse.com.br/produto/elipse-plant-manager/) - The Elipse PIMS platform
+* [Sublime Text](https://www.sublimetext.com/) - A sophisticated text editor for code, markup and prose
+* [Pycharm](https://www.jetbrains.com/pycharm/) - Python IDE for Professional Developers
+* [Anaconda Python](https://www.anaconda.com/distribution/) - Popular Python Data Science Distribution
+
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/lucaskotres/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+
+## Authors
+
+* **Lucas Kotres** - *Initial work* - [github\lucaskotres](https://github.com/lucaskotres)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* [Elipse site](www.elipse.com.br)
+* [Elipse Knowledgebase](kb.elipse.com.br)
+* [Elipse Forum](forum.elipse.com.br)
 
