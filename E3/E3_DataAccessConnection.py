@@ -3,13 +3,13 @@
 import win32com.client
 import datetime as dt
 import numpy as np
-import time
+
 
 eComCall = win32com.client.Dispatch("E3DataAccess.E3DataAccessManager.1")
 print eComCall
 eComCall.Server = "localhost"
 
-tagpath = 'bmsData.PythonValue.Value'
+tagpath = 'data.InternalTag.Value'
 
 Timestamp = dt.datetime.now()
 Quality = 192

@@ -2,6 +2,10 @@ import urllib2
 import os
 import datetime
 
+
+#Script to uninstall Numpy and install Numpy+MKL and Scipy.
+
+
 PATH = 'C:\Program Files\Elipse Software\EpmServer\Pythonx64\\'
 PIP_PATH = 'C:\Program Files\Elipse Software\EpmServer\Pythonx64\Scripts\\'
 
