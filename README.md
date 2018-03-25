@@ -36,7 +36,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* [Elipse site](www.elipse.com.br)
-* [Elipse Knowledgebase](kb.elipse.com.br)
-* [Elipse Forum](forum.elipse.com.br)
+* [Elipse site](https://www.elipse.com.br)
+* [Elipse Knowledgebase](https://kb.elipse.com.br)
+* [Elipse Forum](https://forum.elipse.com.br)
 
