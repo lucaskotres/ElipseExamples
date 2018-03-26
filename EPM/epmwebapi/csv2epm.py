@@ -1,12 +1,6 @@
 
 
 
-# Copyright 2018 Lucas Kotres
-
-#TODO: Validar gravação de dados
-#TODO: incluir funçao para descobrir dialetica
-#TODO: Possibilidade de usar a lib Rows para importar outros tipos de dados.
-
 import epmwebapi as epm
 from epmwebapi.dataobjectattributes import DataObjectAttributes
 from epmwebapi.dataobjectsfilter import DataObjectsFilter
@@ -173,31 +167,39 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 #sort and clean - df1 to newdf
 logger.info('Csv original rows count: {}'.format(len(df1.index)))
 logger.info('Sorting and cleaning data...')
+pd.to_numeric(df1[v_column], errors='coerce')
 df1[v_column].replace(np.nan, 0,inplace=True)
-df1['Date_time'].replace(' ', np.nan, inplace=True)
+df1[t_column].replace(' ', np.nan, inplace=True)
 df1.dropna(subset=[v_column], inplace=True)
-df1.dropna(subset=['Date_time'], inplace=True)
+df1.dropna(subset=[t_column], inplace=True)
 logger.info('Csv cleaned rows count: {}'.format(len(df1.index)))
 
+#sort by datetime
+df1[t_column] = pd.to_datetime(df1[t_column], utc=True)
+newdf = df1.sort_values(by=t_column)
+newdf = newdf.reset_index(drop=True)
 
-df1['Date_time'] = pd.to_datetime(df1['Date_time'], utc=True)
-newdf = df1.sort_values(by='Date_time')
+newdf = newdf[[v_column,t_column]]
 
 
 #epm data format
-desc = np.dtype([('Value','>f8'),('Timestamp','object'),('Quality','>i4')])
+desc = np.dtype([('Value', '>f8'),('Timestamp','object'),('Quality','>i4')])
 datatemp = np.empty(len(df1.index), dtype=desc)
 
-#iteration loop to create EPM format ndarray 
+
+#iteration loop to create EPM format ndarray
+#TODO: insert 128 if bad quality
 i = 0
 printProgressBar(0, len(df1.index), prefix = 'Creating EPM array:', suffix = 'Complete', length = 50)
-while i < len(df1.index):
+while i < len(df1.index):    
     datatemp['Value'][i] = newdf[v_column][i]
     datatemp['Timestamp'][i] = newdf[t_column][i]
     datatemp['Quality'][i] = 0    
     #print('datatemp:{} index:{}'.format(datatemp[i], i))
     printProgressBar(i + 1, len(df1.index), prefix = 'Creating EPM array:', suffix = 'Complete', length = 50)   
     i = i + 1 
+
+
 
 
 #EPM data write
@@ -214,13 +216,15 @@ bv = bv[bvname].historyReadRaw(queryPeriod)
 
 import matplotlib.pyplot as plt
 
-fig, (ax0, ax1) = plt.subplots(nrows=2)
-ax0.set_title('Basic Variable: {}'.format(v_column))
-ax1.set_title('Basic Variable: {}'.format(bvname))
+fig, (ax0, ax1, ax2) = plt.subplots(nrows=3)
+ax0.set_title('csv read values: {} - length:{}'.format(v_column,len(newdf[v_column])))
+ax1.set_title('epm array - length:{}'.format(len(datatemp['Value'])))
+ax2.set_title('Basic Variable: {} - length:{}'.format(bvname, len(bv['Value'])))
 
 ax0.plot(newdf[t_column],newdf[v_column])
-#ax0.plot(bv['Timestamp'],bv['Value'])
-ax0.plot(datatemp['Timestamp'],datatemp['Value'])
+ax1.plot(datatemp['Timestamp'],datatemp['Value'])
+ax2.plot(bv['Timestamp'],bv['Value'])
+
 #ax1.plot(bv['Timestamp'],bv['Value'])
 
 plt.tight_layout()
