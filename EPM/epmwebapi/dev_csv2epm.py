@@ -210,7 +210,6 @@ while i < len(df1.index):
 
 
 
-
 #EPM data write
 logger.info('Writing data. Wait a minute...')
 bv[bvname].historyUpdate(datatemp)
@@ -239,5 +238,27 @@ logger.info('End Process')
 
 
 logger.info('execution time:{}'.format(endtime-initime))
+#exception class
+class ImporterError(Exception):
+    """Basic exception for errors raised by importers"""
+    def __init__(self, importer, msg=None):
+        if msg is None:
+            # Set some default useful error message
+            msg = "An error occured with importer %s" % car
+        super(ImporterError, self).__init__(msg)
+        self.importer = importer
+
+class CsvImporterError(ImporterError):
+    """When can't open csv file"""
+    def __init__(self, importer, csv, path):
+        super(CsvImporterError, self).__init__(csv, msg="Failed to load {} at path {}".format(csv, path))
+        self.csv = csv
+        self.path = path
+
+if __name__ == "__main__":
+
+
+
+
 
 
