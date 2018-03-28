@@ -1,7 +1,4 @@
 
-
-# Copyright 2018 Lucas Kotres
-
 import epmwebapi as epm
 #from epmwebapi.dataobjectattributes import DataObjectAttributes
 #from epmwebapi.dataobjectsfilter import DataObjectsFilter
@@ -101,9 +98,18 @@ initime = dt.datetime.now()
 #Arguments validation
 logger.info('Verifing csv...')
 
+#discover dialect reading first 10 lines and using python engine
+try:
+    reader = pd.read_csv(csvfile, sep = None, iterator = True,engine='python',nrows=10)
+    inferred_sep = reader._engine.data.dialect.delimiter
+    logger.info('Inferred separator: {}'.format(inferred_sep))
+except Exception:
+    logger.error("can't discover csv delimiter (: , |...)")
+    exit(1)
 #read file
 try:
-    df1 = pd.read_csv(csvfile, sep=';',lineterminator='\r',decimal='.')
+    #read all file using inferred separator and c engine(faster)
+    df1 = pd.read_csv(csvfile,sep=inferred_sep, encoding='utf-8', decimal='.', engine='c')
     df_copy = df1.copy(deep=True)
 except Exception:
     logger.error("can't read file: {}".format(csvfile))
@@ -219,23 +225,7 @@ logger.info('Verifing inconsistencies...')
 queryPeriod = epm.QueryPeriod(newdf[t_column][0], newdf[t_column][-1])
 bv = bv[bvname].historyReadRaw(queryPeriod)
 
-logger.info('Plot...')
-import matplotlib.pyplot as plt
-
-fig, (ax0, ax1, ax2) = plt.subplots(nrows=3)
-ax0.set_title('csv read values: {} - length:{}'.format(v_column,len(df1[v_column])))
-ax1.set_title('epm array - length:{}'.format(len(datatemp['Value'])))
-ax2.set_title('Basic Variable: {} - length:{}'.format(bvname, len(bv['Value'])))
-
-ax0.plot(df_copy[t_column],df1_copy[v_column])
-ax1.plot(datatemp['Timestamp'],datatemp['Value'])
-ax2.plot(bv['Timestamp'],bv['Value'])
-
-
-plt.tight_layout()
-plt.show()
-
-#Testar essa parte
+#TODO: arrumar esse teste
 if np.array_equal(datatemp['Timestamp'],bv['Timestamp']):
     logger.info('Timestamp data Ok!')
 else:
@@ -251,3 +241,5 @@ logger.info('End Process')
 
 
 logger.info('execution time:{}'.format(endtime-initime))
+
+
