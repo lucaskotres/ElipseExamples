@@ -96,14 +96,30 @@ initime = dt.datetime.now()
 #Arguments validation
 logger.info('Verifing csv...')
 
-#discover dialect reading first 10 lines and using python engine
-try:
-    reader = pd.read_csv(csvfile, sep = None, iterator = True,engine='python',nrows=10)
-    inferred_sep = reader._engine.data.dialect.delimiter
-    logger.info('Inferred separator: {}'.format(inferred_sep))
-except Exception:
-    logger.error("can't discover csv delimiter (: , |...)")
-    exit(1)
+
+def discover_dialect(csvfile, samplerows=10):
+    """ discover dialect reading first 10 lines and using python engine
+    """
+    try:
+        reader = pd.read_csv(csvfile, sep=None, iterator=True, engine='python', nrows=samplerows)
+        inferred_sep = reader._engine.data.dialect.delimiter
+        logger.info('Inferred separator: {}'.format(inferred_sep))
+        return inferred_sep
+    except Exception:
+        logger.error("can't discover csv delimiter (: , |...)")
+        exit(1)
+
+def import_from_csv(filename, dialect=None):
+    """import data from csv """
+
+    if dialect is None:
+        dialect = discover_dialect(csvfile=filename)
+
+    reader = pd.read_csv(csvfile, sep=dialect, encoding='utf-8', decimal='.', engine='c')
+
+    return reader
+
+
 #read file
 try:
     #read all file using inferred separator and c engine(faster)
@@ -238,6 +254,7 @@ logger.info('End Process')
 
 
 logger.info('execution time:{}'.format(endtime-initime))
+
 #exception class
 class ImporterError(Exception):
     """Basic exception for errors raised by importers"""
@@ -256,6 +273,9 @@ class CsvImporterError(ImporterError):
         self.path = path
 
 if __name__ == "__main__":
+    initime = dt.datetime.now()
+
+    pass
 
 
 
