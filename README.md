@@ -16,7 +16,6 @@ You need to have any of the Elipse Software's platform. See below.
 
 * [Elipse E3](https://www.elipse.com.br/produto/elipse-e3/) - SCADA platform
 * [Elipse EPM](https://www.elipse.com.br/produto/elipse-plant-manager/) - PIMS platform
-* [Sublime Text](https://www.sublimetext.com/) - A sophisticated text editor for code, markup and prose
 * [Pycharm](https://www.jetbrains.com/pycharm/) - Python IDE for Professional Developers
 * [Anaconda Python](https://www.anaconda.com/distribution/) - Popular Python Data Science Distribution
 
