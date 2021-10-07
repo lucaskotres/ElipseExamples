@@ -40,4 +40,47 @@ $return = curl_exec($process);
 curl_close($process);
 echo $return;
 
+// ***** POST ********
+
+// API URL
+$url = 'http://localhost:44332/opcua/v1/read';
+
+// Create a new cURL resource
+$ch = curl_init($url);
+
+// Setup request to send json via POST
+$payload = '{    
+    "items": [
+      {
+        "path": {
+          "language": "OPCUA.BrowsePath",          
+          "path": "/1:BasicVariables/1:Random1"
+        },
+        "attributeId": 13
+      }
+    ]
+  }';
+
+$headers = array('Content-Type: application/json','Content-Length: ' . strlen($payload),"Authorization: Bearer {$token_array["access_token"]}");
+
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($process, CURLOPT_CUSTOMREQUEST, "POST");
+
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+curl_setopt($process, CURLOPT_HEADER, 1);
+curl_setopt($process, CURLOPT_TIMEOUT, 30);
+
+// Return response instead of outputting
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Execute the POST request
+$result = curl_exec($ch);
+
+echo $result;
+
+// Close cURL resource
+curl_close($ch);
+
+
 ?>
