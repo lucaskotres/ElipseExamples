@@ -17,10 +17,10 @@ class e3comm(object):
         read = self.eComCall.ReadValue(e3path,Timestamp,Quality,Value)
 
         if read[0]:
-            print e3path ,"Success read!"
+            print(e3path ,"Success read!")
             return read
         else:
-            print e3path, "Fail read!"
+            print(e3path, "Fail read!")
             return False
 
 
@@ -30,9 +30,9 @@ class e3comm(object):
         tagwrite = self.eComCall.WriteValue(e3path, Timestamp, Quality, Value)
 
         if tagwrite:
-            print e3path,"Success write!"
+            print(e3path,"Success write!")
         else:
-            print e3path,"Fail write!"
+            print(e3path,"Fail write!")
 
         return tagwrite
 
